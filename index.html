@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulación de Concurrencia y Sincronización - Nave Espacial</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            overflow: hidden;
+        }
+        #canvas {
+            display: block;
+            margin: 0 auto;
+        }
+        #ui {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .panel {
+            background: rgba(20, 40, 80, 0.8);
+            border: 2px solid #00FFFF;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 5px;
+        }
+        .control-panel {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #6495ED;
+            border-radius: 10px;
+            padding: 10px;
+            position: absolute;
+            bottom: 5px;
+            left: 10px;
+            color: black;
+        }
+        button {
+            background: #333;
+            color: #fff;
+            border: 1px solid #666;
+            padding: 5px 10px;
+            margin: 2px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #555;
+        }
+        #message {
+            background: rgba(40, 30, 20, 0.9);
+            border: 2px solid #FFFF00;
+            border-radius: 10px;
+            padding: 10px;
+            max-width: 400px;
+        }
+        #status {
+            background: rgba(20, 50, 30, 0.9);
+            border: 2px solid #00FF00;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        #counters {
+            background: rgba(25, 35, 60, 0.9);
+            border: 2px solid #00FFFF;
+            border-radius: 10px;
+            padding: 10px;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+        #progress-bar {
+            width: 180px;
+            height: 15px;
+            background: #1e1e2e;
+            border: 1px solid #fff;
+            border-radius: 7px;
+            position: relative;
+        }
+        #progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, #ff0000, #ffff00);
+            border-radius: 7px;
+            width: 0%;
+        }
+        #percentage {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: #ffff00;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="1280" height="760"></canvas>
+    <div id="ui">
+        <div class="panel" id="mode-panel">
+            <div>Modo actual: <span id="current-mode">CONCURRENCIA</span></div>
+        </div>
+        <div class="panel" id="message">
+            <div id="global-message">Presiona 1-8 para cambiar el modo</div>
+        </div>
+        <div class="panel" id="status">
+            <div>SISTEMA ACTIVO</div>
+        </div>
+    </div>
+    <div class="control-panel">
+        <div>1-8: Modos | R: Reiniciar</div>
+        <div>
+            <button onclick="changeMode(1)">1</button>
+            <button onclick="changeMode(2)">2</button>
+            <button onclick="changeMode(3)">3</button>
+            <button onclick="changeMode(4)">4</button>
+            <button onclick="changeMode(5)">5</button>
+            <button onclick="changeMode(6)">6</button>
+            <button onclick="changeMode(7)">7</button>
+            <button onclick="changeMode(8)">8</button>
+            <button onclick="resetAll()">R</button>
+        </div>
+    </div>
+    <div id="counters">
+        <div>CONTADORES</div>
+        <div id="race-counter">Race: 0</div>
+        <div id="safe-counter">Safe: 0</div>
+        <div id="progress-bar">
+            <div id="progress-fill"></div>
+            <div id="percentage">0%</div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
